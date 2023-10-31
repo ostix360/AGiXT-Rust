@@ -1,6 +1,7 @@
 use std::error::Error;
 
 use async_trait::async_trait;
+use serde_json::json;
 
 use super::provider::Provider;
 
@@ -15,6 +16,6 @@ impl Provider for Gpt4Free {
     }
 
     async fn get_params(&self) -> Result<String, Box<dyn Error>> {
-        Ok("get_params".to_string())
+        Ok(json!({"option": self.option}).to_string())
     }
 }

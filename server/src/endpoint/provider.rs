@@ -23,7 +23,9 @@ pub async fn handle_request(req: Request<Body>) -> Result<Response<Body>, Infall
                 if provider_name.contains("/") {
                     return Ok(Response::new("Invalide provider name".into()));
                 }
-                return Ok(Response::new(format!("Hello, {}", provider_name).into()));
+                let settings = Providers::get_provider_settings(&provider_name).await;
+
+                return Ok(Response::new(json!({"settings": settings}).to_string().into()));
             }
             return Ok(Response::new("This is impossible to access here".into()));
         },

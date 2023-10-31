@@ -23,7 +23,7 @@ pub fn get_provider(provider_name: &str) -> Result<Arc<RwLock<dyn Provider>>, St
     
 }
 
-pub async fn get_provider_option(provider_name: &str) -> String {
+pub async fn get_provider_settings(provider_name: &str) -> String {
     let provider = get_provider(provider_name);
     match provider {
         Ok(provider) => {
