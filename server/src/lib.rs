@@ -1,5 +1,5 @@
 pub mod providers;
-pub mod Providers;
+pub mod providers_ref;
 mod endpoint;
 pub mod app;
 pub mod start;
