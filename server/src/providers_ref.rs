@@ -47,3 +47,20 @@ pub async fn get_provider_settings(provider_name: &str) -> String {
     }
 }
 
+pub async fn get_providers_with_settings() -> String {
+    let mut providers = HashMap::new();
+    for provider_name in PROVIDER_NAMES.iter() {
+        let provider = get_provider(provider_name);
+        match provider {
+            Ok(provider) => {
+                let option = provider.get_params().await.unwrap();
+                providers.insert(provider_name.to_string(), option);
+            },
+            Err(err) => {
+                providers.insert(provider_name.to_string(), err.to_string());
+            }
+        }
+    }
+    serde_json::to_string(&providers).unwrap()
+}
+

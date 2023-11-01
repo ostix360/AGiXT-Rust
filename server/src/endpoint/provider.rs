@@ -14,7 +14,8 @@ pub async fn handle_request(req: Request<Body>) -> Result<Response<Body>, Infall
             return Ok(response);
         },
         (&Method::GET, "/api/providers") => {
-            return Ok(Response::new("Hello, Providers".into()));
+            let provider_settings = providers_ref::get_providers_with_settings().await;
+            return Ok(Response::new(Body::from(json!({ "providers": provider_settings }).to_string())));
         },
         (&Method::GET, _) => {
             let path = req.uri().path(); 
