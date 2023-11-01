@@ -10,7 +10,6 @@ use url::form_urlencoded;
 use crate::endpoint::provider;
 
 pub async fn handle_request(req: Request<Body>) -> Result<Response<Body>, Infallible> {
-    println!("Hello from my pc");
     let path = req.uri().path();
     if path.starts_with("/api/provider") {
         return provider::handle_request(req).await;

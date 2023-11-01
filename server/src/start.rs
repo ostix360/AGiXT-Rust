@@ -8,7 +8,7 @@ use crate::app::handle_request;
 pub async fn start() {
     pretty_env_logger::init();
 
-
+    
     // We'll bind to 127.0.0.1:3000
     let addr = SocketAddr::from(([127, 0, 0, 1], 3000));
 
@@ -18,11 +18,13 @@ pub async fn start() {
         // service_fn converts our function into a `Service`
         Ok::<_, Infallible>(service_fn(hello_world))
     });
-
+    
+    
     let server = Server::bind(&addr).serve(make_svc);
 
     let graceful = server.with_graceful_shutdown(shutdown_signal());
-
+    
+    log::info!("Server started at {:?}", addr);
     // Run this server for... forever!
     if let Err(e) = graceful.await {
         eprintln!("server error: {}", e);

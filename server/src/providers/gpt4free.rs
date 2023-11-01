@@ -9,6 +9,15 @@ pub struct Gpt4Free {
     pub option: String,
 }
 
+impl Gpt4Free {
+    pub fn new() -> Self {
+        Self {
+            option: "option".to_string(),
+        }
+    }
+    
+}
+
 #[async_trait]
 impl Provider for Gpt4Free {
     async fn instruct(&self) -> Result<String, Box<dyn Error>> {
