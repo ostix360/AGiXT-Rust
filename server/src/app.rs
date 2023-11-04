@@ -7,14 +7,14 @@ use hyper::{Body, Request, Response};
 
 use url::form_urlencoded;
 
-use crate::endpoint::provider;
+use crate::endpoint::{provider, agent};
 
 pub async fn handle_request(req: Request<Body>) -> Result<Response<Body>, Infallible> {
     let path = req.uri().path();
     if path.starts_with("/api/provider") {
         return provider::handle_request(req).await;
     }else if path.starts_with("/api/agent") {
-        return Ok(Response::new("Hello, Agent".into()));
+        return agent::handle_request(req).await;
     }else if path.starts_with("/api/chain") {
         return Ok(Response::new("Hello, Chain".into()));
     }else {
