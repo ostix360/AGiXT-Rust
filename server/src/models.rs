@@ -208,9 +208,9 @@ pub struct AgentSettings {
 
 #[derive(Debug, serde::Deserialize)]
 pub struct AgentConfig {
-    agent_name: String,
-    settings: HashMap<String, serde_json::Value>,
-    commands: HashMap<String, serde_json::Value>,
+    pub agent_name: String,
+    pub settings: Option<HashMap<String, serde_json::Value>>,
+    pub commands: HashMap<String, serde_json::Value>,
 }
 
 #[derive(Debug, serde::Deserialize)]

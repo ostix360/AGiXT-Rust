@@ -6,15 +6,14 @@ use hyper::http::StatusCode;
 use tokio::sync::Mutex;
 use url::Url;
 use serde_json::{json, Value};
-use lazy_static::lazy_static;
 
 use log::{info, error};
 use std::convert::Infallible;
+use crate::api_client;
 use crate::models::{AgentConfig, AgentSettings, AgentNewName, AgentCommands, AgentPrompt, ToggleCommandPayload};
 
 async fn add_agent(agent: AgentConfig, user: String) -> Result<Response<Body>, Infallible> {
-    
-    Ok(Response::new(Body::from("")))
+    api_client::add_agent(agent).await
 }
 
 async fn import_agent(agent: AgentConfig, user: String) -> Result<Response<Body>, Infallible> {
@@ -167,3 +166,33 @@ async fn parse_body<T: serde::de::DeserializeOwned>(body: &[u8]) -> Result<T, Re
     }
 }
 
+
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use hyper::header::HeaderValue;
+    use hyper::Body;
+    use maplit::hashmap;
+    use std::convert::Infallible;
+
+    #[tokio::test]
+    async fn test_add_agent() {
+        let agent = AgentConfig {
+            agent_name: "test_agent".to_string(),
+            commands: hashmap! {},
+            settings: Some(hashmap!["setting1".to_string() => Value::String("value1".to_string())]),
+        };
+        let user = String::from("test_user");
+
+        let result = add_agent(agent, user).await;
+
+        match result {
+            Ok(response) => {
+                assert_eq!(response.status(), StatusCode::OK);
+                // Vous pouvez ajouter d'autres assertions ici pour vérifier le corps de la réponse ou d'autres aspects de la réponse.
+            }
+            Err(e) => panic!("Erreur lors de l'appel à add_agent: {:?}", e),
+        }
+    }
+}
