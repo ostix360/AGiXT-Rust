@@ -1,67 +1,67 @@
-use std::collections::HashMap;
-use hyper::{Body, Request, Response, Server, Method, body};
-use hyper::service::{make_service_fn, service_fn};
-use hyper::header::{HeaderMap, HeaderValue};
-use hyper::http::StatusCode;
-use tokio::sync::Mutex;
-use url::Url;
-use serde_json::{json, Value};
 
-use log::{info, error};
+use hyper::{Body, Request, Response, Method};
+
+use hyper::header::{HeaderValue};
+use hyper::http::StatusCode;
+
+
+
+
+
 use std::convert::Infallible;
 use crate::api_client;
 use crate::models::{AgentConfig, AgentSettings, AgentNewName, AgentCommands, AgentPrompt, ToggleCommandPayload};
 
-async fn add_agent(agent: AgentConfig, user: String) -> Result<Response<Body>, Infallible> {
+async fn add_agent(agent: AgentConfig, _user: String) -> Result<Response<Body>, Infallible> {
     api_client::add_agent(agent).await
 }
 
-async fn import_agent(agent: AgentConfig, user: String) -> Result<Response<Body>, Infallible> {
+async fn import_agent(_agent: AgentConfig, _user: String) -> Result<Response<Body>, Infallible> {
     // TODO: Implement import_agent function
     Ok(Response::new(Body::from("")))
 }
 
-async fn rename_agent(agent_name: String, new_name: AgentNewName, user: String) -> Result<Response<Body>, Infallible> {
+async fn rename_agent(_agent_name: String, _new_name: AgentNewName, _user: String) -> Result<Response<Body>, Infallible> {
     // TODO: Implement rename_agent function
     Ok(Response::new(Body::from("")))
 }
 
-async fn update_agent_settings(agent_name: String, settings: AgentSettings, user: String, authorization: HeaderValue) -> Result<Response<Body>, Infallible> {
+async fn update_agent_settings(_agent_name: String, _settings: AgentSettings, _user: String, _authorization: HeaderValue) -> Result<Response<Body>, Infallible> {
     // TODO: Implement update_agent_settings function
     Ok(Response::new(Body::from("")))
 }
 
-async fn update_agent_commands(agent_name: String, commands: AgentCommands, user: String, authorization: HeaderValue) -> Result<Response<Body>, Infallible> {
+async fn update_agent_commands(_agent_name: String, _commands: AgentCommands, _user: String, _authorization: HeaderValue) -> Result<Response<Body>, Infallible> {
     // TODO: Implement update_agent_commands function
     Ok(Response::new(Body::from("")))
 }
 
-async fn delete_agent(agent_name: String, user: String) -> Result<Response<Body>, Infallible> {
+async fn delete_agent(_agent_name: String, _user: String) -> Result<Response<Body>, Infallible> {
     // TODO: Implement delete_agent function
     Ok(Response::new(Body::from("")))
 }
 
-async fn get_agents(user: String) -> Result<Response<Body>, Infallible> {
+async fn get_agents(_user: String) -> Result<Response<Body>, Infallible> {
     // TODO: Implement get_agents function
     Ok(Response::new(Body::from("")))
 }
 
-async fn get_agent_config(agent_name: String, user: String, authorization: HeaderValue) -> Result<Response<Body>, Infallible> {
+async fn get_agent_config(_agent_name: String, _user: String, _authorization: HeaderValue) -> Result<Response<Body>, Infallible> {
     // TODO: Implement get_agent_config function
     Ok(Response::new(Body::from("")))
 }
 
-async fn prompt_agent(agent_name: String, agent_prompt: AgentPrompt, user: String, authorization: HeaderValue) -> Result<Response<Body>, Infallible> {
+async fn prompt_agent(_agent_name: String, _agent_prompt: AgentPrompt, _user: String, _authorization: HeaderValue) -> Result<Response<Body>, Infallible> {
     // TODO: Implement prompt_agent function
     Ok(Response::new(Body::from("")))
 }
 
-async fn get_commands(agent_name: String, user: String, authorization: HeaderValue) -> Result<Response<Body>, Infallible> {
+async fn get_commands(_agent_name: String, _user: String, _authorization: HeaderValue) -> Result<Response<Body>, Infallible> {
     // TODO: Implement get_commands function
     Ok(Response::new(Body::from("")))
 }
 
-async fn toggle_command(agent_name: String, payload: ToggleCommandPayload, user: String, authorization: HeaderValue) -> Result<Response<Body>, Infallible> {
+async fn toggle_command(_agent_name: String, _payload: ToggleCommandPayload, _user: String, _authorization: HeaderValue) -> Result<Response<Body>, Infallible> {
     // TODO: Implement toggle_command function
     Ok(Response::new(Body::from("")))
 }
